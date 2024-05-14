@@ -1,0 +1,34 @@
+[
+    {
+        "gpu": "RTX 4060",
+        "cpu": "Ryzen 5 5600",
+        "emulator": "Yuzu",
+        "location": "Great Sky Islands",
+        "benchmark_info": "Average FPS: 60\n1% Low: 40\n0.1% Low:20",
+        "user_notes": ""
+    },
+    {
+        "gpu": "RTX 4070",
+        "cpu": "Ryzen 7 5800x3d",
+        "emulator": "Yuzu",
+        "location": "Lookout Landing",
+        "benchmark_info": "Average FPS: 70\n1% Low: 50\n0.1% Low:30",
+        "user_notes": "GPU slightly overclocked"
+    },
+    {
+        "gpu": "RTX 4080",
+        "cpu": "Ryzen 7 7800x3d",
+        "emulator": "Ryujinx",
+        "location": "Kakariko Village",
+        "benchmark_info": "Average FPS: 70\n1% Low: 50\n0.1% Low:30",
+        "user_notes": "Better performance on Yuzu"
+    },
+    {
+        "gpu": "RTX 4090",
+        "cpu": "Ryzen 7 9800x3d",
+        "emulator": "Ryujinx",
+        "location": "Kakariko Village",
+        "benchmark_info": "Average FPS: 700\n1% Low: 500\n0.1% Low:300",
+        "user_notes": "Best CPU Ever"
+    }
+]
