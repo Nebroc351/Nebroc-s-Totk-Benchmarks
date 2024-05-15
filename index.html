@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Generate Table's lines
     function generateTableRows(data) {
         const tableBody = document.querySelector('#comparison-table tbody');
-        tableBody.innerHTML = ''; 
+        tableBody.innerHTML = ''; //clear the table before modifying it
         data.forEach(userData => {
             const row = document.createElement('tr');
             row.innerHTML = `
