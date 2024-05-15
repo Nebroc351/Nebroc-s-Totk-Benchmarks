@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebroc's Totk Benchmarks</title>
+    <style>
+        /* Styles CSS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Nebroc's Totk Benchmarks</h2>
+
+<form>
+    <label for="gpu-filter">GPU:</label>
+    <select id="gpu-filter">
+        <option value="">All</option>
+    </select>
+
+    <label for="cpu-filter">CPU:</label>
+    <select id="cpu-filter">
+        <option value="">All</option>
+    </select>
+
+    <label for="emulator-filter">Emulator:</label>
+    <select id="emulator-filter">
+        <option value="">All</option>
+    </select>
+
+    <label for="location-filter">Location:</label>
+    <select id="location-filter">
+        <option value="">All</option>
+    </select>
+</form>
+
+<!-- TABLEAU -->
+<table id="comparison-table">
+    <thead>
+        <tr>
+            <th>GPU</th>
+            <th>CPU</th>
+            <th>Emulator</th>
+            <th>Location</th>
+            <th>Benchmark Infos</th>
+            <th>User Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Les lignes du tableau seront générées dynamiquement ici -->
+    </tbody>
+</table>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Fonction pour générer les options des filtres
+    function generateFilterOptions(data, property, selectId) {
+        const selectElement = document.getElementById(selectId);
+        const uniqueValues = [...new Set(data.map(item => item[property]))]; // Filtrer les valeurs uniques
+        uniqueValues.forEach(value => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = value;
+            selectElement.appendChild(option);
+        });
+    }
+
+    // Fonction pour générer les lignes du tableau
+    function generateTableRows(data) {
+        const tableBody = document.querySelector('#comparison-table tbody');
+        tableBody.innerHTML = ''; // Vider le contenu existant
+        data.forEach(userData => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${userData.gpu}</td>
+                <td>${userData.cpu}</td>
+                <td>${userData.emulator}</td>
+                <td>${userData.location}</td>
+                <td>${userData.benchmark_info}</td>
+                <td>${userData.user_notes}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Charger les données JSON
+    fetch('database.json')
+        .then(response => response.json())
+        .then(jsonObj => {
+            // Générer les options des filtres
+            generateFilterOptions(jsonObj, 'gpu', 'gpu-filter');
+            generateFilterOptions(jsonObj, 'cpu', 'cpu-filter');
+            generateFilterOptions(jsonObj, 'emulator', 'emulator-filter');
+            generateFilterOptions(jsonObj, 'location', 'location-filter');
+
+            // Générer les lignes du tableau
+            generateTableRows(jsonObj);
+
+            // Filtrer le tableau
+            const filterTable = () => {
+                const selectedGPU = document.getElementById('gpu-filter').value;
+                const selectedCPU = document.getElementById('cpu-filter').value;
+                const selectedEmulator = document.getElementById('emulator-filter').value;
+                const selectedLocation = document.getElementById('location-filter').value;
+
+                const filteredData = jsonObj.filter(userData => {
+                    return (
+                        (selectedGPU === '' || userData.gpu === selectedGPU) &&
+                        (selectedCPU === '' || userData.cpu === selectedCPU) &&
+                        (selectedEmulator === '' || userData.emulator === selectedEmulator) &&
+                        (selectedLocation === '' || userData.location === selectedLocation)
+                    );
+                });
+
+                generateTableRows(filteredData);
+            };
+
+            // Ajouter les événements de filtrage
+            document.getElementById('gpu-filter').addEventListener('change', filterTable);
+            document.getElementById('cpu-filter').addEventListener('change', filterTable);
+            document.getElementById('emulator-filter').addEventListener('change', filterTable);
+            document.getElementById('location-filter').addEventListener('change', filterTable);
+
+            // Filtrer le tableau au chargement de la page
+            filterTable();
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
+});
+</script>
+
+</body>
+</html>
