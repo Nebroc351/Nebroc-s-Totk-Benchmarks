@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nebroc's Totk Benchmarks</title>
     <style>
-        /* Styles CSS */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -52,7 +51,7 @@
     </select>
 </form>
 
-<!-- TABLEAU -->
+<!-- Table -->
 <table id="comparison-table">
     <thead>
         <tr>
@@ -65,16 +64,16 @@
         </tr>
     </thead>
     <tbody>
-        <!-- Les lignes du tableau seront générées dynamiquement ici -->
+        <!-- Table's lines go here -->
     </tbody>
 </table>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Fonction pour générer les options des filtres
+    // Generate filters
     function generateFilterOptions(data, property, selectId) {
         const selectElement = document.getElementById(selectId);
-        const uniqueValues = [...new Set(data.map(item => item[property]))]; // Filtrer les valeurs uniques
+        const uniqueValues = [...new Set(data.map(item => item[property]))]; // ensure filters are unique
         uniqueValues.forEach(value => {
             const option = document.createElement('option');
             option.value = value;
@@ -83,10 +82,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Fonction pour générer les lignes du tableau
+    // Generate Table's lines
     function generateTableRows(data) {
         const tableBody = document.querySelector('#comparison-table tbody');
-        tableBody.innerHTML = ''; // Vider le contenu existant
+        tableBody.innerHTML = ''; 
         data.forEach(userData => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -101,20 +100,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Charger les données JSON
+    // Load data from the JSON
     fetch('database.json')
         .then(response => response.json())
         .then(jsonObj => {
-            // Générer les options des filtres
             generateFilterOptions(jsonObj, 'gpu', 'gpu-filter');
             generateFilterOptions(jsonObj, 'cpu', 'cpu-filter');
             generateFilterOptions(jsonObj, 'emulator', 'emulator-filter');
             generateFilterOptions(jsonObj, 'location', 'location-filter');
 
-            // Générer les lignes du tableau
             generateTableRows(jsonObj);
 
-            // Filtrer le tableau
             const filterTable = () => {
                 const selectedGPU = document.getElementById('gpu-filter').value;
                 const selectedCPU = document.getElementById('cpu-filter').value;
@@ -133,13 +129,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 generateTableRows(filteredData);
             };
 
-            // Ajouter les événements de filtrage
             document.getElementById('gpu-filter').addEventListener('change', filterTable);
             document.getElementById('cpu-filter').addEventListener('change', filterTable);
             document.getElementById('emulator-filter').addEventListener('change', filterTable);
             document.getElementById('location-filter').addEventListener('change', filterTable);
 
-            // Filtrer le tableau au chargement de la page
             filterTable();
         })
         .catch(error => console.error('Error fetching JSON:', error));
