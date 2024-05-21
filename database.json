@@ -30,5 +30,13 @@
         "location": "Kakariko Village",
         "benchmark_info": "Average FPS: 700\n1% Low: 500\n0.1% Low: 300",
         "user_notes": "Best CPU Ever"
+    },
+    {
+        "gpu": "RTX 4090",
+        "cpu": "Ryzen 7 9800x3d",
+        "emulator": "Ryujinx",
+        "location": "Kakariko Village",
+        "benchmark_info": "Average FPS: 700\n1% Low: 500\n0.1% Low: 300",
+        "user_notes": "Best CPU Ever"
     }
 ]
