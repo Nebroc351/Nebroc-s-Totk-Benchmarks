@@ -135,7 +135,6 @@ fetch("database.json")
             element.appendChild(para_user);
             
             //for the filters
-
             if(gpu_list.includes(current_gpu) === false) {
                 const para_filter_gpu = document.createElement("option");
                 const node_filter_gpu = document.createTextNode(current_gpu);
@@ -181,32 +180,6 @@ fetch("database.json")
     
     //initial call
     HtmlGenerator();
-});
-
-document.addEventListener("DOMContentLoaded", function () { 
-    //associate variables with filters
-    const gpuFilter = document.getElementById("gpu-filter");
-    const cpuFilter = document.getElementById("cpu-filter");
-    const emulatorFilter = document.getElementById("emulator-filter");
-    const locationFilter = document.getElementById("location-filter");
-
-    function filterTable() { //actual function to filter things
-        const selectedGPU = gpuFilter.value;
-        const selectedCPU = cpuFilter.value;
-        const selectedEmulator = emulatorFilter.value;
-        const selectedLocation = locationFilter.value;
-
-    }
-
-
-    //event listener, basically update when user changes filters
-    gpuFilter.addEventListener("change", filterTable);
-    cpuFilter.addEventListener("change", filterTable);
-    emulatorFilter.addEventListener("change", filterTable);
-    locationFilter.addEventListener("change", filterTable);
-
-    //initial call
-    filterTable();
 });
 
 </script>
