@@ -6,7 +6,7 @@
     <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebroc"s Totk Benchmarks</title>
+    <title>Nebroc's Totk Benchmarks</title>
     <style>
         table {
             width: 100%;
@@ -31,28 +31,31 @@
 </head>
 <body>
 
-<h2>Nebroc"s Totk Benchmarks</h2>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="script.js" type="text/javascript"></script>
+
+<h2>Nebroc's Totk Benchmarks</h2>
 
 <form>
     <label for="gpu-filter">GPU:</label>
-    <select id="gpu-filter">
+    <select id="gpu-filter" onChange="HtmlGenerator()">
         <option value="all">All</option>
     </select>
 
     <label for="cpu-filter">CPU:</label>
-<select id="cpu-filter">
-    <option value="all">All</option>
-</select>
+    <select id="cpu-filter" onChange="HtmlGenerator()">
+        <option value="all">All</option>
+    </select>
 
-<label for="emulator-filter">Emulator:</label>
-<select id="emulator-filter">
-    <option value="all">All</option>
-</select>
+    <label for="emulator-filter">Emulator:</label>
+    <select id="emulator-filter" onChange="HtmlGenerator()">
+        <option value="all">All</option>
+    </select>
 
-<label for="location-filter">Location:</label>
-<select id="location-filter">
-    <option value="all">All</option>
-</select>
+    <label for="location-filter">Location:</label>
+    <select id="location-filter" onChange="HtmlGenerator()">
+        <option value="all">All</option>
+    </select>
 
 </form>
 
@@ -68,121 +71,9 @@
         </tr>
     </thead>
     <tbody id="tbody">
+        <tr><td>this shouldn't show up</td></tr>
     </tbody>
 </table>
-
-<script>
-fetch("database.json")
-    .then(response => response.json())
-    .then(jsonResponse => {
-
-    function HtmlGenerator() { 
-        const gpu_list = [];
-        const cpu_list = [];
-        const emu_list = [];
-        const loc_list = [];
-
-        for (let i = 0; i < jsonResponse.length; i++) {
-            //here we generate lines themselves
-            const id = "tr" + i
-            const current_gpu = jsonResponse[i]["gpu"]
-            const current_cpu = jsonResponse[i]["cpu"]
-            const current_emu = jsonResponse[i]["emulator"]
-            const current_loc = jsonResponse[i]["location"]
-            const current_bench = jsonResponse[i]["benchmark_info"]
-            const current_user = jsonResponse[i]["user_notes"]
-
-            const para = document.createElement("tr");
-            para.setAttribute("id", id)
-
-            const element_line = document.getElementById("tbody");
-            element_line.appendChild(para);
-
-            //and from there we actually put the stuff in those lines
-            //note : there might be a way to do that more efficiently through a loop
-
-            //for the tab
-            const para_gpu = document.createElement("td");
-            const node_gpu = document.createTextNode(current_gpu);
-            para_gpu.appendChild(node_gpu);
-
-            const para_cpu = document.createElement("td");
-            const node_cpu = document.createTextNode(current_cpu);
-            para_cpu.appendChild(node_cpu);
-
-            const para_emu = document.createElement("td");
-            const node_emu = document.createTextNode(current_emu);
-            para_emu.appendChild(node_emu);
-
-            const para_loc = document.createElement("td");
-            const node_loc = document.createTextNode(current_loc);
-            para_loc.appendChild(node_loc);
-
-            const para_bench = document.createElement("td");
-            const node_bench = document.createTextNode(current_bench);
-            para_bench.appendChild(node_bench);
-
-            const para_user = document.createElement("td");
-            const node_user = document.createTextNode(current_user);
-            para_user.appendChild(node_user);
-
-            const element = document.getElementById(id);
-            element.appendChild(para_gpu);
-            element.appendChild(para_cpu);
-            element.appendChild(para_emu);
-            element.appendChild(para_loc);
-            element.appendChild(para_bench);
-            element.appendChild(para_user);
-            
-            //for the filters
-            if(gpu_list.includes(current_gpu) === false) {
-                const para_filter_gpu = document.createElement("option");
-                const node_filter_gpu = document.createTextNode(current_gpu);
-                para_filter_gpu.appendChild(node_filter_gpu);
-                gpu_list.push(current_gpu);
-
-                const filter_gpu = document.getElementById("gpu-filter");
-                filter_gpu.appendChild(para_filter_gpu);
-            }
-
-            if(cpu_list.includes(current_cpu) === false) {
-                const para_filter_cpu = document.createElement("option");
-                const node_filter_cpu = document.createTextNode(current_cpu);
-                para_filter_cpu.appendChild(node_filter_cpu);
-                cpu_list.push(current_cpu);
-
-                const filter_cpu = document.getElementById("cpu-filter");
-                filter_cpu.appendChild(para_filter_cpu);
-            }
-            
-            if(emu_list.includes(current_emu) === false) {
-                const para_filter_emu = document.createElement("option");
-                const node_filter_emu = document.createTextNode(current_emu);
-                para_filter_emu.appendChild(node_filter_emu);
-                emu_list.push(current_emu)
-
-                const filter_emu = document.getElementById("emulator-filter");
-                filter_emu.appendChild(para_filter_emu);
-            }
-
-            if(loc_list.includes(current_loc) === false) {
-                const para_filter_loc = document.createElement("option");
-                const node_filter_loc = document.createTextNode(current_loc);
-                para_filter_loc.appendChild(node_filter_loc);
-                loc_list.push(current_loc);
-
-                const filter_loc = document.getElementById("location-filter");
-                filter_loc.appendChild(para_filter_loc);
-            }
-
-        }
-    }
-    
-    //initial call
-    HtmlGenerator();
-});
-
-</script>
 
 </body>
 </html>
