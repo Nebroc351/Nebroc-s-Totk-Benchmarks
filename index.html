@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"> 
     <meta http-equiv="Pragma" content="no-cache"> 
@@ -8,25 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Nebroc's Totk Benchmarks</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            white-space: pre-line;
-        }
-
-        th, tr:nth-child(even) {
-            /* background-color: #f2f2f2; */
-            /* backdrop-filter: brightness(0.95); */ /*applied relative to background colour obviously meaning a much too faint offset at lower brightness*/
-            background-color: rgba(0,0,0,0.5);
-        }
-    </style>
 </head>
 <body>
 
@@ -35,44 +16,50 @@
 
 <h2 id="title">Nebroc's Totk Benchmarks</h2>
 
-<form>
-    <label for="gpu-filter">GPU:</label>
-    <select id="gpu-filter" onChange="HtmlGenerator()">
-        <option value="all">All</option>
-    </select>
+<input id="submit-benchmark" type="button" value="Click here to add a Benchmark!" onclick="location.href = 'submit.html';" />
 
-    <label for="cpu-filter">CPU:</label>
-    <select id="cpu-filter" onChange="HtmlGenerator()">
-        <option value="all">All</option>
-    </select>
 
-    <label for="emulator-filter">Emulator:</label>
-    <select id="emulator-filter" onChange="HtmlGenerator()">
-        <option value="all">All</option>
-    </select>
-
-    <label for="location-filter">Location:</label>
-    <select id="location-filter" onChange="HtmlGenerator()">
-        <option value="all">All</option>
-    </select>
-
-</form>
-
-<table id="comparison-table">
-    <thead>
-        <tr>
-            <th>GPU</th>
-            <th>CPU</th>
-            <th>Emulator</th>
-            <th>Location</th>
-            <th>Benchmark Infos</th>
-            <th>User Notes</th>
-        </tr>
-    </thead>
-    <tbody id="tbody">
-        <tr><td>this shouldn't show up</td></tr>
-    </tbody>
-</table>
+<div class="wrapper">
+    <form>
+        <label for="gpu-filter">GPU:</label>
+        <select id="gpu-filter" onChange="HtmlGenerator()">
+            <option value="all">All</option>
+        </select>
+    
+        <label for="cpu-filter">CPU:</label>
+        <select id="cpu-filter" onChange="HtmlGenerator()">
+            <option value="all">All</option>
+        </select>
+    
+        <label for="emulator-filter">Emulator:</label>
+        <select id="emulator-filter" onChange="HtmlGenerator()">
+            <option value="all">All</option>
+        </select>
+    
+        <label for="location-filter">Location:</label>
+        <select id="location-filter" onChange="HtmlGenerator()">
+            <option value="all">All</option>
+        </select>
+    
+    </form>
+    
+    <table id="comparison-table">
+        <thead>
+            <tr>
+                <th>GPU</th>
+                <th>CPU</th>
+                <th>Emulator</th>
+                <th>Location</th>
+                <th>Benchmark Infos</th>
+                <th>User Notes</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <!-- might wish reconsidering this element's id for a more explicit one ? -->
+        </tbody>
+    </table>
+    
+</div>
 
 </body>
 </html>

@@ -4,7 +4,7 @@ const emu_list = [];
 const loc_list = [];
 
 function HtmlGenerator() { 
-    fetch("database.json")
+    fetch("resources/data/database.json")
         .then(response => response.json())
         .then(jsonResponse => {
 
