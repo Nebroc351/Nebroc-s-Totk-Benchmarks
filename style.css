@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
 html,body {
 	padding: 0;
 	margin: 0;
@@ -13,8 +16,6 @@ html,body {
 body {
 	display: grid;
 	place-items: center;
-	
-	padding: 8px;
 	
 	--background-colour: #161616;
 	background: var(--background-colour);
@@ -42,6 +43,10 @@ body::before {
 	background-size: var(--domain-size) var(--domain-size);
 	background-repeat: repeat;
 	
+	/* mask-image: radial-gradient(transparent 30%, white); */
+	mask-image: radial-gradient(white 75%, transparent);
+	z-index: -1;
+	
 	animation: slide 1.5s forwards infinite linear;
 }
 
@@ -61,10 +66,44 @@ body::before {
 	-webkit-text-stroke-color: white;
 	-webkit-text-stroke-width: 2px;
 	color: transparent;
+	background: linear-gradient(transparent, gray);
+	background-clip: text;
+}
+
+
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6vh;
+	width: 100%;
+}
+
+
+
+table#comparison-table {
+	/* flex-grow: 1; display table messes with flexbox */
+	--_padding: 10%;
+	width: calc(100% - var(--_padding));
 	
-	/* &::before {
-		content: inherit;
-	}*/
+	background-color: var(--background-colour);
+	border-collapse: collapse;
+	
+	
+	th, tr:nth-child(even) {
+		/* background-color: #f2f2f2; */
+		/* backdrop-filter: brightness(0.95); */ /*applied relative to background colour obviously meaning a much too faint offset at lower brightness*/
+		background-color: rgba(0,0,0,0.5);
+	}
+	
+	th, td {
+		border: 1px solid #ddd;
+		padding: 0.5rem;
+		text-align: left;
+		white-space: pre-line;
+	}
+	
 }
 
 
